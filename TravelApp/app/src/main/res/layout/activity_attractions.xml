@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".AttractionsActivity">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Attractions Near Me "
+        android:id="@+id/pickerButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/attributions"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/attraction_name"
+        android:layout_below="@+id/pickerButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:textIsSelectable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/attraction_address"
+        android:layout_below="@+id/attraction_name"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/attraction_phone"
+        android:autoLink="phone"
+        android:layout_marginTop="80dp"
+        android:textColorLink="#3F51B5"
+        android:layout_below="@+id/attraction_address"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:autoLink="web"
+        android:id="@+id/attractions_website"
+        android:layout_below="@+id/attraction_phone"
+        android:textColorLink="#3F51B5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/poweredBy"
+        android:src="@drawable/powered_by_google_light"
+        android:layout_above="@+id/attributions"
+        android:layout_toLeftOf="@+id/attributions"
+        android:layout_toStartOf="@+id/attributions" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/tap_for_directions"
+        android:layout_marginBottom="58dp"
+        android:layout_above="@+id/poweredBy"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="#3F51B5" />
+
+</RelativeLayout>
