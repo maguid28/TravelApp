@@ -81,6 +81,12 @@ public class MainActivity extends Activity {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("loggedIn", "Logged Out");
+            editor.remove("firstname");
+            editor.remove("surname");
+            editor.remove("phone");
+            editor.remove("kin");
+            editor.remove("kinContact");
+
             editor.commit();
 
             //remove username from preferences

@@ -13,8 +13,7 @@ android:padding="20dp"
     android:layout_alignParentTop="true"
     android:layout_centerHorizontal="true"
     android:textColor="#000000"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:text="No Weather Info Found" />
+    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 <TextView
     android:id="@+id/updated_field"

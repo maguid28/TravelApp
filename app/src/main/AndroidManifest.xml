@@ -20,15 +20,14 @@
         android:icon="@mipmap/plane"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBwYyLdoQhxfGV690t-uOAO-dH_IC40VQg" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
 
         <activity
             android:name=".LoginActivity"
@@ -41,19 +40,30 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_main" />
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".WeatherActivity" />
-        <activity android:name=".EmergencyServices" />
-        <activity android:name=".PersonalInfo" />
-        <activity android:name=".PersonalInfoEdit" />
-        <activity android:name=".AttractionsActivity" />
-        <activity android:name=".MapsActivity" />
-        <activity android:name=".SubmitWarningActivity" />
+            android:label="@string/title_activity_signup" />
+        <activity android:name=".WeatherActivity"
+            android:label="Weather"/>
+        <activity android:name=".EmergencyServices"
+            android:label="Emergency Services"/>
+        <activity android:name=".PersonalInfo"
+            android:label="Personal Info"/>
+        <activity android:name=".PersonalInfoEdit"
+            android:label="Personal Info"/>
+        <activity android:name=".AttractionsActivity"
+            android:label="Attractions"/>
+        <activity android:name=".MapsActivity"
+            android:label="Safe Travel"/>
+        <activity android:name=".SubmitWarningActivity"
+            android:label="Submit Warning"/>
+        <activity android:name=".GeoFencingActivity" />
+
+        <service
+            android:name=".GeofenceTransitionsIntentService"
+            android:exported="true" />
+
     </application>
 
 </manifest>

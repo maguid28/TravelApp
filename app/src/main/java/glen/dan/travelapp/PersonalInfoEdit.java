@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 public class PersonalInfoEdit extends AppCompatActivity {
 
-    EditText name, surname, phone, kin, kinContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

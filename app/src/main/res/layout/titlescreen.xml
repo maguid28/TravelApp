@@ -45,4 +45,13 @@
         android:layout_below="@+id/textView7"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:id="@+id/imageView2"
+        android:src="@mipmap/plane"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp" />
+
 </RelativeLayout>

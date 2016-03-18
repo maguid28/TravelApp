@@ -12,7 +12,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Smart Travel"
+        android:text="Safe Travel"
         android:id="@+id/smart_travel_button"
         android:onClick="onButtonClick"
         android:layout_centerVertical="true"

@@ -32,7 +32,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         //if user is already logged in
         else {
             // Close the activity and start main activity
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            Intent i = new Intent(LoginActivity.this, GeoFencingActivity.class);
             startActivity(i);
             finish();
         }
@@ -62,7 +62,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 
             if(nameStr.equals("")) {
-                String message = "Please enter your username";
+                String message = "Please enter your email address";
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
             else {

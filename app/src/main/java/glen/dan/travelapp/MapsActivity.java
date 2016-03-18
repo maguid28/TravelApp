@@ -42,10 +42,6 @@ import glen.dan.travelapp.services.MarkerJSONParser;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    public String p_username;
-    public String p_warning;
-    public String p_description;
-    public LatLng p_latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,19 +119,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     // Adding marker on the GoogleMaps
-    private void addMarker(LatLng latlng, String username, String warning, String description) {
+    private void addMarker(LatLng latlng, String warning, String description) {
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latlng);
-        markerOptions.title(warning);
-        markerOptions.snippet(description);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution));
-        mMap.addMarker(markerOptions);
-
-
-
-
-
+        if(warning.equals("Burglary")) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latlng);
+            markerOptions.title(warning);
+            markerOptions.snippet(description);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker_blue));
+            mMap.addMarker(markerOptions);
+        }
+        if(warning.equals("Assault")) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latlng);
+            markerOptions.title(warning);
+            markerOptions.snippet(description);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker_pink));
+            mMap.addMarker(markerOptions);
+        }
+        if(warning.equals("Theft")) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latlng);
+            markerOptions.title(warning);
+            markerOptions.snippet(description);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker_green));
+            mMap.addMarker(markerOptions);
+        }
+        if(warning.equals("Other")) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latlng);
+            markerOptions.title(warning);
+            markerOptions.snippet(description);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker));
+            mMap.addMarker(markerOptions);
+        }
 
 
     }
@@ -196,11 +213,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for(int i=0; i<result.size();i++){
                 HashMap<String, String> marker = result.get(i);
                 LatLng latlng = new LatLng(Double.parseDouble(marker.get("latitude")), Double.parseDouble(marker.get("longitude")));
-                String username = marker.get("username");
                 String warning = marker.get("warning");
                 String description = marker.get("description");
 
-                addMarker(latlng, username, warning, description);
+                addMarker(latlng, warning, description);
             }
         }
     }

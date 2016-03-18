@@ -16,7 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import glen.dan.travelapp.MainActivity;
+import glen.dan.travelapp.GeoFencingActivity;
 
 public class LoginSignUpBackgroundTask extends AsyncTask<String, Void, String> {
 
@@ -46,8 +46,7 @@ public class LoginSignUpBackgroundTask extends AsyncTask<String, Void, String> {
 
             String name = params[1];
             String email = params[2];
-            String username = params[3];
-            String user_pass = params[4];
+            String user_pass = params[3];
 
             try {
                 URL url = new URL(reg_url);
@@ -58,7 +57,6 @@ public class LoginSignUpBackgroundTask extends AsyncTask<String, Void, String> {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
                 String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
                         URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" +
-                        URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
                         URLEncoder.encode("user_pass", "UTF-8") + "=" + URLEncoder.encode(user_pass, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -76,7 +74,7 @@ public class LoginSignUpBackgroundTask extends AsyncTask<String, Void, String> {
         }
         else if (method.equals("login")) {
 
-            String login_name = params[1];
+            String login_email = params[1];
             String login_pass = params[2];
 
             try {
@@ -88,7 +86,7 @@ public class LoginSignUpBackgroundTask extends AsyncTask<String, Void, String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String data = URLEncoder.encode("login_name", "UTF-8") + "=" + URLEncoder.encode(login_name, "UTF-8") + "&" +
+                String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(login_email, "UTF-8") + "&" +
                         URLEncoder.encode("login_pass", "UTF-8") + "=" + URLEncoder.encode(login_pass, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -133,7 +131,7 @@ public class LoginSignUpBackgroundTask extends AsyncTask<String, Void, String> {
         }
         //if login is successful
         else if(result.contains("Login Success")) {
-            Intent i = new Intent(ctx,MainActivity.class);
+            Intent i = new Intent(ctx,GeoFencingActivity.class);
             ctx.startActivity(i);
             Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
         }

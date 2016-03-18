@@ -39,7 +39,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/attraction_address"
         android:layout_below="@+id/attraction_name"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="15dp" />
 
     <TextView
         android:layout_width="wrap_content"

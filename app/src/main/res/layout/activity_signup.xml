@@ -13,7 +13,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="First Name"
+        android:hint="Name"
         android:id="@+id/TFname"
         android:layout_below="@+id/textView5"
         android:layout_alignParentStart="true" />
@@ -32,24 +32,13 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        android:id="@+id/TFuname"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/TFemail"
-        android:layout_alignParentRight="true" />
-
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:hint="Password"
         android:id="@+id/TFpass1"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/TFuname"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/TFemail" />
 
 
     <EditText

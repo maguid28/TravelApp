@@ -33,6 +33,12 @@ public class AttractionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attractions);
+        PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
+        try {
+            startActivityForResult(intentBuilder.build(AttractionsActivity.this), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
 
         mName = (TextView) findViewById(R.id.attraction_name);
         mAddress = (TextView) findViewById(R.id.attraction_address);
@@ -41,24 +47,6 @@ public class AttractionsActivity extends AppCompatActivity {
         tapForDirections = (TextView) findViewById(R.id.tap_for_directions);
         mAttributions = (TextView) findViewById(R.id.attributions);
 
-        Button pickerButton = (Button) findViewById(R.id.pickerButton);
-
-        pickerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-
-                    PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
-                    startActivityForResult(intentBuilder.build(AttractionsActivity.this), PLACE_PICKER_REQUEST);
-
-
-
-                } catch (GooglePlayServicesRepairableException
-                        | GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     @Override
