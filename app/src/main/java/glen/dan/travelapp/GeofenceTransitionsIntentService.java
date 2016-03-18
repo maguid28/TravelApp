@@ -10,12 +10,7 @@ import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
-import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class GeofenceTransitionsIntentService extends IntentService {
 
@@ -28,48 +23,35 @@ public class GeofenceTransitionsIntentService extends IntentService {
         super.onCreate();
     }
 
-
     @Override
     protected void onHandleIntent(Intent intent) {
         GeofencingEvent event = GeofencingEvent.fromIntent(intent);
 
         if(event!=null) {
-
             if (event.hasError()) {
                 int errorCode = event.getErrorCode();
                 Log.e("Geofence feature", "Location Services error: " + errorCode);
             }
             else {
-
-                //Accumulate a list of event geofences
-                List<String> geofenceIds = new ArrayList<>();
-                for (Geofence geofence : event.getTriggeringGeofences()) {
-                    geofenceIds.add(geofence.getRequestId());
-                }
-                onEnteredGeofences(geofenceIds);
-
+                onEnteredGeofences();
             }
         }
-
     }
 
 
-    private void onEnteredGeofences(List<String> geofenceIds) {
-          //for (String geofenceId : geofenceIds) {
-          //  String geofenceName = "";
-
+    private void onEnteredGeofences() {
             String contextText = "You have entered a warning area";
 
-            // 1. Create a NotificationManager
+            // create a NotificationManager
             NotificationManager notificationManager =
                     (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-            // 2. Create a PendingIntent for AllGeofencesActivity
+            // create a PendingIntent for AllGeofencesActivity
             Intent intent = new Intent(this, MapsActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            // 3. Create and send a notification
+            // create and send a notification
             Notification notification = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.mipmap.plane)
                     .setContentTitle("Safe Travel")
@@ -79,8 +61,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(true)
                     .build();
+            notification.defaults |= Notification.DEFAULT_VIBRATE;
             notificationManager.notify(0, notification);
-        //}
     }
 
 

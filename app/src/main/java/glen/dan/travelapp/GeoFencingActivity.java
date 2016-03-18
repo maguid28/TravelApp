@@ -7,10 +7,10 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -35,7 +35,6 @@ import java.util.concurrent.ExecutionException;
 
 import glen.dan.travelapp.services.MarkerJSONParser;
 import glen.dan.travelapp.services.MyGeofence;
-import glen.dan.travelapp.services.MyGeofenceStore;
 
 public class GeoFencingActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -65,16 +64,12 @@ public class GeoFencingActivity extends AppCompatActivity implements GoogleApiCl
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
         mApiClient.connect();
-
-
 
         Intent i = new Intent(GeoFencingActivity.this, MainActivity.class);
         startActivity(i);
 
     }
-
 
     // Adding marker on the GoogleMaps
     private void addMarker(LatLng latLng) {
@@ -84,29 +79,12 @@ public class GeoFencingActivity extends AppCompatActivity implements GoogleApiCl
         long expiration_duration = Geofence.NEVER_EXPIRE;
         int transitionType = Geofence.GEOFENCE_TRANSITION_ENTER;
 
-
-
         myGeofence = new MyGeofence(id, latLng.latitude, latLng.longitude, radius, expiration_duration, transitionType);
 
-
-        MyGeofenceStore myGeofenceStore = new MyGeofenceStore(this);
         // Instantiate the current List of geofences.
         mGeofenceList = new ArrayList<>();
-
-
-
-        myGeofenceStore.setGeofence(id, myGeofence);
         mGeofenceList.add(myGeofence.toGeofence());
-
-
-
     }
-
-
-
-
-
-
 
     private GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
@@ -114,7 +92,6 @@ public class GeoFencingActivity extends AppCompatActivity implements GoogleApiCl
         builder.addGeofences(mGeofenceList);
          return builder.build();
     }
-
 
     private PendingIntent getGeofenceTransitionPendingIntent() {
         // Reuse the PendingIntent if we already have it.
@@ -137,15 +114,18 @@ public class GeoFencingActivity extends AppCompatActivity implements GoogleApiCl
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
-        LocationServices.GeofencingApi.addGeofences(mApiClient, getGeofencingRequest(), mGeofenceRequestIntent);
-        Toast.makeText(this, "Start service", Toast.LENGTH_LONG).show();
+        //catch geofences are already added.
+        try {
+            LocationServices.GeofencingApi.addGeofences(mApiClient, getGeofencingRequest(), mGeofenceRequestIntent);
+        }catch (IllegalArgumentException e){
+            Log.e("Geofence feature", "Geofences already added");
+        }
         finish();
     }
 
 
-
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         // If the error has a resolution, start a Google Play services activity to resolve it.
         if (connectionResult.hasResolution()) {
             try {
@@ -165,10 +145,6 @@ public class GeoFencingActivity extends AppCompatActivity implements GoogleApiCl
             LocationServices.GeofencingApi.removeGeofences(mApiClient, mGeofenceRequestIntent);
         }
     }
-
-
-
-
 
 
 
