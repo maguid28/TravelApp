@@ -4,6 +4,7 @@ package glen.dan.travelapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.view.View;
@@ -25,17 +26,28 @@ public class LoginActivity extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //if user is not logged in
-        if(!already_logged_in()) {
-            setContentView(R.layout.activity_login);
-        }
-        //if user is already logged in
-        else {
-            // Close the activity and start main activity
-            Intent i = new Intent(LoginActivity.this, GeoFencingActivity.class);
-            startActivity(i);
-            finish();
-        }
+        setContentView(R.layout.titlescreen);
+        new CountDownTimer(3000,1000){
+            @Override
+            public void onTick(long millisUntilFinished){}
+
+            @Override
+            public void onFinish(){
+                //if user is not logged in
+                if(!already_logged_in()) {
+                    setContentView(R.layout.activity_login);
+                }
+                //if user is already logged in
+                else {
+                    // Close the activity and start main activity
+                    Intent i = new Intent(LoginActivity.this, GeoFencingActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        }.start();
+
+
 
     }
 

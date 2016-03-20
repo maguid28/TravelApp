@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -63,11 +64,44 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
         autoCompView.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.autocomplete_list_item));
         autoCompView.setOnItemClickListener(this);
 
+        autoCompView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(autoCompView.getWindowToken(),
+                        InputMethodManager.RESULT_UNCHANGED_SHOWN);
+
+                String location = autoCompView.getText().toString();
+                List<Address> addressList = null;
+
+                if (!location.equals("")) {
+                    Geocoder geocoder = new Geocoder(SubmitWarningActivity.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    assert addressList != null;
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                }
+            }
+        });
+
         autoCompView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(autoCompView.getWindowToken(),
+                            InputMethodManager.RESULT_UNCHANGED_SHOWN);
+
                     String location = autoCompView.getText().toString();
                     List<Address> addressList = null;
 
@@ -114,7 +148,7 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 String  username = sharedPreferences.getString("username", "username") ;
                 String method = "entry";
-                
+
                 autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
 
                 String location = autoCompView.getText().toString();
