@@ -5,22 +5,19 @@
     android:background="#FFFFFF">
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="1">
 
-    <EditText
-        android:layout_width="262dp"
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/addressbar" />
+        android:id="@+id/autocomplete"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:hint="Find location" />
 
-    <Button
-        android:layout_width="98dp"
-        android:layout_height="40dp"
-        android:text="Search"
-        android:id="@+id/search_button"
-        android:layout_gravity="right"
-        android:onClick="onButtonClick" />
 </LinearLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"

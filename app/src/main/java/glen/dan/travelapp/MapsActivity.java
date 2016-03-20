@@ -1,11 +1,9 @@
 package glen.dan.travelapp;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -13,9 +11,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.EditText;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,8 +42,9 @@ import java.util.List;
 
 import glen.dan.travelapp.services.MarkerJSONParser;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemClickListener {
 
+    AutoCompleteTextView autoCompView;
     private GoogleMap mMap;
 
     @Override
@@ -51,41 +55,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+        autoCompView.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.autocomplete_list_item));
+        autoCompView.setOnItemClickListener(this);
+
+        autoCompView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+                    String location = autoCompView.getText().toString();
+                    List<Address> addressList = null;
+
+                    if (!location.equals("")) {
+                        Geocoder geocoder = new Geocoder(MapsActivity.this);
+                        try {
+                            addressList = geocoder.getFromLocationName(location, 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        assert addressList != null;
+                        Address address = addressList.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(latLng));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {}
 
     public void onButtonClick(View v) {
-        //if the user clicks the search button
-        if (v.getId() == R.id.search_button) {
-            EditText location_tf = (EditText) findViewById(R.id.addressbar);
-            String location = location_tf.getText().toString();
-            List<Address> addressList = null;
-
-            if (!location.equals("")) {
-                Geocoder geocoder = new Geocoder(this);
-                try {
-                    addressList = geocoder.getFromLocationName(location, 1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                assert addressList != null;
-                Address address = addressList.get(0);
-                LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latLng));
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-            }
-        }
-
         //if user clicks submit warning button launch that activity
-        if(v.getId() == R.id.submit_warning_button) {
-            Intent i = new Intent(this,SubmitWarningActivity.class);
+        if (v.getId() == R.id.submit_warning_button) {
+            Intent i = new Intent(this, SubmitWarningActivity.class);
             startActivity(i);
         }
     }
-
-
-
 
 
     @Override
@@ -106,13 +118,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //set my location
         mMap.setMyLocationEnabled(true);
         //Zoom camera in to current location
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-        if (location != null)
-        {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 12));
+        Location location = getLastKnownLocation();
+        if (location != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14));
         }
+    }
+
+
+
+    private Location getLastKnownLocation() {
+        LocationManager mLocationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = mLocationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            }
+            Location l = mLocationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
     }
 
 

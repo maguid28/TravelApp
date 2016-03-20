@@ -10,8 +10,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Attractions Near Me "
+        android:text="@string/find_more_attractions_button_text"
         android:id="@+id/pickerButton"
+        android:onClick="onPlaceClick"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -20,7 +21,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/attributions"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
 
     <TextView
@@ -40,7 +40,7 @@
         android:id="@+id/attraction_address"
         android:layout_below="@+id/attraction_name"
         android:layout_centerHorizontal="true"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
         android:id="@+id/poweredBy"
         android:src="@drawable/powered_by_google_light"
         android:layout_above="@+id/attributions"
-        android:layout_toLeftOf="@+id/attributions"
+        android:contentDescription="@string/powered_by_google_image_text"
         android:layout_toStartOf="@+id/attributions" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:layout_above="@+id/poweredBy"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="#3F51B5" />
 
 </RelativeLayout>

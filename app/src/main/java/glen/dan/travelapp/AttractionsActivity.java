@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -29,6 +28,7 @@ public class AttractionsActivity extends AppCompatActivity {
     private TextView mAttributions;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,18 @@ public class AttractionsActivity extends AppCompatActivity {
         mPhone = (TextView) findViewById(R.id.attraction_phone);
         tapForDirections = (TextView) findViewById(R.id.tap_for_directions);
         mAttributions = (TextView) findViewById(R.id.attributions);
+    }
 
+    public void onPlaceClick(View v) {
+        if(v.getId() == R.id.pickerButton) {
+            //this is the activity we need to launch
+            PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
+            try {
+                startActivityForResult(intentBuilder.build(AttractionsActivity.this), PLACE_PICKER_REQUEST);
+            } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -78,7 +89,7 @@ public class AttractionsActivity extends AppCompatActivity {
             mAddress.setText(address);
             mWebsite.setText(website);
             mPhone.setText(phone);
-            tapForDirections.setText("TAP FOR DIRECTIONS");
+            tapForDirections.setText(R.string.TAP_FOR_DIRECTIONS);
             mAttributions.setText(Html.fromHtml(attributions));
 
 

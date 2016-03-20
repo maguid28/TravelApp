@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Emergency Information for "
+        android:text="@string/emergency_info_for_text"
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -32,7 +32,7 @@
     <Button
         android:layout_width="160dp"
         android:layout_height="70dp"
-        android:text="Call Police"
+        android:text="@string/call_police_button_text"
         android:id="@+id/call_police_button"
         android:layout_below="@+id/location_text"
         android:layout_centerHorizontal="true"
@@ -41,7 +41,7 @@
     <Button
         android:layout_width="160dp"
         android:layout_height="70dp"
-        android:text="Call Ambulance"
+        android:text="@string/call_amb_button_text"
         android:id="@+id/call_ambulance_button"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/call_police_button"
@@ -50,7 +50,7 @@
     <Button
         android:layout_width="160dp"
         android:layout_height="70dp"
-        android:text="Call Fire Services"
+        android:text="@string/call_fire_button_text"
         android:id="@+id/call_fire_button"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/call_ambulance_button"

@@ -13,11 +13,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,8 +37,9 @@ import java.util.List;
 
 import glen.dan.travelapp.services.SubmitWarningBackgroundTask;
 
-public class SubmitWarningActivity extends FragmentActivity implements OnMapReadyCallback {
+public class SubmitWarningActivity extends FragmentActivity implements OnMapReadyCallback, AdapterView.OnItemClickListener {
 
+    AutoCompleteTextView autoCompView;
     private GoogleMap mMap;
     private static final int REQUEST_LOCATION = 1;
 
@@ -53,32 +59,35 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
+        autoCompView.setAdapter(new GooglePlacesAutocompleteAdapter(this, R.layout.autocomplete_list_item));
+        autoCompView.setOnItemClickListener(this);
 
-        //create search button
-        Button search_button = (Button) findViewById(R.id.report_search_button);
-        search_button.setOnClickListener(new View.OnClickListener() {
+        autoCompView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View view) {
-                EditText location_tf = (EditText) findViewById(R.id.report_search_box);
-                String location = location_tf.getText().toString();
-                List<Address> addressList = null;
-                if (!location.equals("")) {
-                    geocoder = new Geocoder(SubmitWarningActivity.this);
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
+                    String location = autoCompView.getText().toString();
+                    List<Address> addressList = null;
 
-                    if (addressList != null) {
-                        address = addressList.get(0);
-                        latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    if (!location.equals("")) {
+                        Geocoder geocoder = new Geocoder(SubmitWarningActivity.this);
+                        try {
+                            addressList = geocoder.getFromLocationName(location, 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        assert addressList != null;
+                        Address address = addressList.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(latLng));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                     }
-                    else Toast.makeText(SubmitWarningActivity.this, "Location Not Found", Toast.LENGTH_SHORT).show();
-
+                    return true;
                 }
+                return false;
             }
         });
 
@@ -94,9 +103,6 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
         descriptionText = (EditText) findViewById(R.id.description_field);
 
 
-
-
-
         // Create button
         Button submit = (Button) findViewById(R.id.submit_button);
         // button click event
@@ -108,11 +114,10 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 String  username = sharedPreferences.getString("username", "username") ;
                 String method = "entry";
+                
+                autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
 
-
-
-                EditText location_tf = (EditText) findViewById(R.id.report_search_box);
-                String location = location_tf.getText().toString();
+                String location = autoCompView.getText().toString();
                 List<Address> addressList = null;
                 if (!location.equals("")) {
                     geocoder = new Geocoder(SubmitWarningActivity.this);
@@ -140,12 +145,10 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
                 else Toast.makeText(SubmitWarningActivity.this, "No Location Selected", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {}
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -169,4 +172,5 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 11));
         }
     }
+
 }

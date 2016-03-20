@@ -16,4 +16,18 @@
     <string name="title_activity_main">Travel Companion</string>
     <string name="title_activity_signup">Sign up</string>
     <string name="title_activity_personal_info">Personal Info</string>
+    <string name="TAP_FOR_DIRECTIONS">TAP FOR DIRECTIONS</string>
+    <string name="find_more_attractions_button_text">Find More Attractions Near Me</string>
+    <string name="powered_by_google_image_text">powered by google icon</string>
+    <string name="emergency_info_for_text">Emergency Information for</string>
+    <string name="call_police_button_text">Call Police</string>
+    <string name="call_amb_button_text">Call Ambulance</string>
+    <string name="call_fire_button_text">Call Fire Services</string>
+    <string name="icon_button_text">app icon</string>
+    <string name="please_wait_text">Please Wait...</string>
+    <string name="email_textview">Email</string>
+    <string name="password_textview">Password</string>
+    <string name="login_textview">Log In</string>
+    <string name="signup_textview">Sign Up</string>
+
 </resources>

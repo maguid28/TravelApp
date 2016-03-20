@@ -16,13 +16,14 @@
         android:src="@mipmap/plane"
         android:layout_marginTop="113dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/icon_button_text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Please Wait..."
+        android:text="@string/please_wait_text"
         android:id="@+id/textView14"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
