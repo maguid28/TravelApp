@@ -30,17 +30,26 @@ public class SignUpActivity extends Activity {
             String pass2str = pass2.getText().toString();
 
             //Check if email and password is valid
-            if(!isValidEmail(emailstr) || !pass1str.equals(pass2str)){
+            if(!isValidEmail(emailstr) || !pass1str.equals(pass2str) || pass1str.equals("") || namestr.equals("")){
 
-                if(!pass1str.equals(pass2str)){
-                    //popup message if passwords do not match
-                    Toast pass = Toast.makeText(SignUpActivity.this, "Passwords don't match", Toast.LENGTH_SHORT);
+                if(namestr.equals("")){
+                    Toast pass = Toast.makeText(SignUpActivity.this, getString(R.string.entername), Toast.LENGTH_SHORT);
+                    pass.show();
+                }
+                else if(!isValidEmail(emailstr)) {
+                    Toast pass = Toast.makeText(SignUpActivity.this, getString(R.string.notavalidemail), Toast.LENGTH_SHORT);
+                    pass.show();
+                }
+                else if(pass1str.equals("")) {
+                    Toast pass = Toast.makeText(SignUpActivity.this, getString(R.string.enterapassword), Toast.LENGTH_SHORT);
                     pass.show();
                 }
                 else {
-                    Toast pass = Toast.makeText(SignUpActivity.this, "Not a valid Email address", Toast.LENGTH_SHORT);
+                    //popup message if passwords do not match
+                    Toast pass = Toast.makeText(SignUpActivity.this, getString(R.string.passwordsdontmatch), Toast.LENGTH_SHORT);
                     pass.show();
                 }
+
             }
             else{
                 String method = "register";

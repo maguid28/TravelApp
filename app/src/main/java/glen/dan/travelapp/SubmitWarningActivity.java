@@ -69,7 +69,7 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(autoCompView.getWindowToken(),
                         InputMethodManager.RESULT_UNCHANGED_SHOWN);
 
@@ -126,10 +126,9 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
         });
 
 
-
         //create dropdown menu
         dropdown = (Spinner)findViewById(R.id.dropdownmenu);
-        String[] items = new String[]{"--", "Theft", "Assault", "Burglary", "Other"};
+        String[] items = new String[]{"--", getString(R.string.theft), getString(R.string.assault),getString(R.string.burglary), getString(R.string.other)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
 
@@ -176,9 +175,16 @@ public class SubmitWarningActivity extends FragmentActivity implements OnMapRead
                     finish();
 
                 }
-                else Toast.makeText(SubmitWarningActivity.this, "No Location Selected", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(SubmitWarningActivity.this, getString(R.string.nolocationselected), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onButtonClick(View v) {
+        if (v.getId() == R.id.clearButton) {
+            autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete1);
+            autoCompView.setText("");
+        }
     }
 
     @Override

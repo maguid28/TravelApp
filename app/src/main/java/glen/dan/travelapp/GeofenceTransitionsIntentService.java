@@ -40,7 +40,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
 
     private void onEnteredGeofences() {
-            String contextText = "You have entered a warning area";
+            String contextText = getString(R.string.youhaveenteredawarningarea);
 
             // create a NotificationManager
             NotificationManager notificationManager =
@@ -54,7 +54,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
             // create and send a notification
             Notification notification = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.mipmap.plane)
-                    .setContentTitle("Safe Travel")
+                    .setContentTitle(getString(R.string.safetravel))
                     .setContentText(contextText)
                     .setContentIntent(pendingNotificationIntent)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(contextText))

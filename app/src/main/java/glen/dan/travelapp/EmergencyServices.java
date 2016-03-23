@@ -38,7 +38,7 @@ public class EmergencyServices extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:1231"));
+                    callIntent.setData(Uri.parse("tel:1122"));
                     if (ActivityCompat.checkSelfPermission(EmergencyServices.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(EmergencyServices.this, new String[]{Manifest.permission.CALL_PHONE}, 0);
                         return;

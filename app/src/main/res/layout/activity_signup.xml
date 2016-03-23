@@ -13,8 +13,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="@string/nameentertext"
         android:id="@+id/TFname"
+        android:singleLine="true"
         android:layout_below="@+id/textView5"
         android:layout_alignParentStart="true" />
 
@@ -22,12 +23,12 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/emailentertext"
         android:id="@+id/TFemail"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/TFname"
         android:inputType="textEmailAddress"
-        android:layout_alignParentRight="true" />
+        android:singleLine="true" />
 
 
     <EditText
@@ -35,10 +36,10 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/passwordentertext"
         android:id="@+id/TFpass1"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
+        android:singleLine="true"
         android:layout_below="@+id/TFemail" />
 
 
@@ -47,15 +48,16 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:hint="Reenter Password"
+        android:hint="@string/reenterpasswordtext"
         android:id="@+id/TFpass2"
         android:layout_below="@+id/TFpass1"
+        android:singleLine="true"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="@string/signupbuttontext"
         android:id="@+id/Bsignupbutton"
         android:layout_gravity="center_horizontal"
         android:onClick="onSignupClick"
@@ -66,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Register"
+        android:text="@string/registertext"
         android:id="@+id/textView5"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

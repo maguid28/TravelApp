@@ -133,6 +133,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Intent i = new Intent(this, SubmitWarningActivity.class);
             startActivity(i);
         }
+
+        if (v.getId() == R.id.clearButton) {
+            autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+            autoCompView.setText("");
+        }
     }
 
 
@@ -189,7 +194,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Adding marker on the GoogleMaps
     private void addMarker(LatLng latlng, String warning, String description) {
 
-        if(warning.equals("Burglary")) {
+        if(warning.equals(getString(R.string.burglary))) {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latlng);
             markerOptions.title(warning);
@@ -197,7 +202,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker_blue));
             mMap.addMarker(markerOptions);
         }
-        if(warning.equals("Assault")) {
+        if(warning.equals(getString(R.string.assault))) {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latlng);
             markerOptions.title(warning);
@@ -205,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker_pink));
             mMap.addMarker(markerOptions);
         }
-        if(warning.equals("Theft")) {
+        if(warning.equals(getString(R.string.theft))) {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latlng);
             markerOptions.title(warning);
@@ -213,7 +218,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.caution_marker_green));
             mMap.addMarker(markerOptions);
         }
-        if(warning.equals("Other")) {
+        if(warning.equals(getString(R.string.other))) {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latlng);
             markerOptions.title(warning);
@@ -232,20 +237,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         protected String doInBackground(Void... params) {
+
+            //create url string
             String strUrl = "http://student.computing.dcu.ie/~maguid28/get_all_data.php";
             URL url;
             StringBuilder sb = new StringBuilder();
             try {
+                //create a connection to the url
                 url = new URL(strUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
+                //get input stream
                 InputStream iStream = connection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(iStream));
                 String line;
+                //get each line from buffered reader
+                //put it in a string
                 while( (line = reader.readLine()) != null){
                     sb.append(line);
                 }
 
+                //close buffered reader and input stream
                 reader.close();
                 iStream.close();
 

@@ -9,22 +9,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="glen.dan.travelapp.GeoFenceActivity">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView"
-        android:src="@mipmap/plane"
-        android:layout_marginTop="113dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/icon_button_text" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/please_wait_text"
-        android:id="@+id/textView14"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>

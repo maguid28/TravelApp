@@ -52,7 +52,7 @@ public class WeatherActivity extends AppCompatActivity implements AdapterView.On
                 cityField.setText(weather_city);
                 detailsField.setText(weather_description);
                 currentTemperatureField.setText(weather_temperature + "C");
-                humidity_field.setText("Humidity: "+weather_humidity);
+                humidity_field.setText(getString(R.string.humiditytext2)+weather_humidity);
                 weatherIcon.setText(Html.fromHtml(weather_iconText));
 
             }
@@ -100,7 +100,7 @@ public class WeatherActivity extends AppCompatActivity implements AdapterView.On
                                 cityField.setText(weather_city);
                                 detailsField.setText(weather_description);
                                 currentTemperatureField.setText(weather_temperature + "C");
-                                humidity_field.setText("Humidity: " + weather_humidity);
+                                humidity_field.setText(getString(R.string.humiditytext1) + weather_humidity);
                                 weatherIcon.setText(Html.fromHtml(weather_iconText));
                             }
                         });
@@ -110,7 +110,7 @@ public class WeatherActivity extends AppCompatActivity implements AdapterView.On
                         asyncTask.execute(latitude, longitude);
                     }
                     catch (IndexOutOfBoundsException e){
-                        cityField.setText("No Weather Available Here");
+                        cityField.setText(R.string.noweathertext);
                         detailsField.setText("");
                         currentTemperatureField.setText("");
                         humidity_field.setText("");
@@ -149,7 +149,7 @@ public class WeatherActivity extends AppCompatActivity implements AdapterView.On
                                 cityField.setText(weather_city);
                                 detailsField.setText(weather_description);
                                 currentTemperatureField.setText(weather_temperature + "C");
-                                humidity_field.setText("Humidity: "+weather_humidity);
+                                humidity_field.setText(getString(R.string.humidity_field)+weather_humidity);
                                 weatherIcon.setText(Html.fromHtml(weather_iconText));
                             }
                         });
@@ -166,6 +166,13 @@ public class WeatherActivity extends AppCompatActivity implements AdapterView.On
         });
     }
 
+
+    public void onButtonClick(View v) {
+        if (v.getId() == R.id.clearButton) {
+            autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+            autoCompView.setText("");
+        }
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {}

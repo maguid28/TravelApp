@@ -6,13 +6,37 @@ android:background="#FFFFFF"
 android:padding="20dp"
     tools:context=".WeatherActivity">
 
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autocomplete"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:hint="Find Weather For Location" />
+        android:layout_marginTop="9dp"
+        android:padding="5dp"
+        android:id="@+id/frameLayout">
+
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/autocomplete"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:hint="@string/findweathertext" />
+
+        <ImageButton
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/frameLayout"
+            android:layout_gravity="right|center_vertical"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/clear_button"
+            android:onClick="onButtonClick"
+            android:background="#ffffff"
+            android:layout_marginTop="-4dp" />
+
+    </FrameLayout>
+
 <TextView
     android:id="@+id/city_field"
     android:layout_width="wrap_content"

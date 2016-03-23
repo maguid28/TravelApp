@@ -45,6 +45,7 @@ public class SubmitWarningBackgroundTask extends AsyncTask<String, String, Strin
     protected String doInBackground(String... args) {
 
         String method = args[0];
+        //create url string
         String url_create_entry = "http://student.computing.dcu.ie/~maguid28/create_entry.php";
 
         if(method.equals("entry")) {
@@ -54,7 +55,7 @@ public class SubmitWarningBackgroundTask extends AsyncTask<String, String, Strin
             String longitude = args[4];
             String latitude = args[5];
 
-            // Build Parameters
+            // Build Parameters in ArrayList
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("username", username));
             params.add(new BasicNameValuePair("type_of_warning", type_of_warning));
@@ -62,13 +63,13 @@ public class SubmitWarningBackgroundTask extends AsyncTask<String, String, Strin
             params.add(new BasicNameValuePair("longitude", longitude));
             params.add(new BasicNameValuePair("latitude", latitude));
 
-            // getting JSON Object
+            // make request
             JSONObject json = jsonParser.makeHttpRequest(url_create_entry, "POST", params);
 
-            // check log cat fro response
+            // check log for response
             Log.d("Create Response", json.toString());
 
-            // check for success tag
+            // check for success
             try
             {
                 int success = json.getInt(TAG_SUCCESS);

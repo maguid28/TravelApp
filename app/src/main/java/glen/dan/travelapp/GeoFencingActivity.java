@@ -55,6 +55,7 @@ public class GeoFencingActivity extends AppCompatActivity implements GoogleApiCl
         new RetrieveTask().execute();
         try {
             String str_result= new RetrieveTask().execute().get();
+            Log.e("str_result", str_result);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }

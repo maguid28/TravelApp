@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("loggedIn", "Logged In");
+        editor.putString("loggedIn", getString(R.string.loggedin));
         editor.commit();
 
         //get country name and display it
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
             //change loggedIn preference to no
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("loggedIn", "Logged Out");
+            editor.putString("loggedIn", getString(R.string.loggedout));
             editor.remove("firstname");
             editor.remove("surname");
             editor.remove("phone");
@@ -94,9 +94,9 @@ public class MainActivity extends Activity {
             editor.commit();
             //start Login activity
             Intent i = new Intent(this, LoginActivity.class);
+            finish();
             startActivity(i);
         }
-
     }
 
     //get the flag for the country you are in and display it
@@ -106,6 +106,9 @@ public class MainActivity extends Activity {
         switch (country)
         {
             case "Ireland":
+                flag.setImageResource(R.drawable.ireland);
+                break;
+            case "Irlande":
                 flag.setImageResource(R.drawable.ireland);
                 break;
             case "United Kingdom":

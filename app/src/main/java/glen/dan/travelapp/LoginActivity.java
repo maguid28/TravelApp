@@ -9,7 +9,9 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import glen.dan.travelapp.services.LoginSignUpBackgroundTask;
@@ -17,17 +19,19 @@ import glen.dan.travelapp.services.LoginSignUpBackgroundTask;
 public class LoginActivity extends Activity implements OnClickListener {
 
 
+    Spinner dropdown;
+
     @Override
     public void onClick(View v) {
-
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.titlescreen);
-        new CountDownTimer(3000,1000){
+        new CountDownTimer(2000,1000){
             @Override
             public void onTick(long millisUntilFinished){}
 
@@ -46,17 +50,14 @@ public class LoginActivity extends Activity implements OnClickListener {
                 }
             }
         }.start();
-
-
-
     }
 
     private boolean already_logged_in() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String  data = sharedPreferences.getString("loggedIn", "Logged Out") ;
+        String  data = sharedPreferences.getString("loggedIn", getString(R.string.loggedout)) ;
         Toast.makeText(this,data, Toast.LENGTH_LONG).show();
         //if user has not logged in before
-        return (!data.equals("Logged Out"));
+        return (!data.equals(getString(R.string.loggedout)));
     }
 
 
@@ -74,7 +75,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 
             if(nameStr.equals("")) {
-                String message = "Please enter your email address";
+                String message = getString(R.string.pleaseenteremailaddress);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
             else {

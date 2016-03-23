@@ -4,21 +4,36 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="1">
-
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autocomplete"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:hint="Find location" />
+        android:layout_marginTop="9dp"
+        android:padding="5dp"
+        android:id="@+id/frameLayout">
 
-</LinearLayout>
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/autocomplete"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:hint="@string/mapsearchbarhinttext" />
+
+        <ImageButton
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/frameLayout"
+            android:layout_gravity="right|center_vertical"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/clear_button"
+            android:onClick="onButtonClick"
+            android:background="#ffffff"
+            android:layout_marginTop="-4dp" />
+
+    </FrameLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -26,13 +41,13 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="361dp"
-        android:layout_height="482dp"
+        android:layout_height="466dp"
         tools:context="dan.mapssmart.MapsActivity" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit Warning"
+        android:text="@string/submitwarningbuttontext"
         android:onClick="onButtonClick"
         android:id="@+id/submit_warning_button" />
 

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,114 +8,107 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context="glen.dan.travelapp.PersonalInfoEdit">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Personal Info"
-        android:id="@+id/textView6"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="First Name:"
-        android:id="@+id/textView9"
-        android:layout_above="@+id/textView10"
-        android:layout_alignStart="@+id/textView10"
-        android:layout_marginBottom="40dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Surname:"
-        android:id="@+id/textView10"
-        android:layout_marginBottom="41dp"
-        android:layout_above="@+id/textView11"
-        android:layout_toStartOf="@+id/textView6" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Phone number:"
-        android:id="@+id/textView11"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/textView10" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/firstnameedittext"
+                android:id="@+id/textView9"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Next Of Kin:"
-        android:id="@+id/textView12"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignStart="@+id/textView11" />
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_et"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Kin Contact Info:"
-        android:id="@+id/textView13"
-        android:layout_below="@+id/textView12"
-        android:layout_alignStart="@+id/textView12"
-        android:layout_marginTop="40dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/surnameedittext"
+                android:id="@+id/textView10"
+                android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/save_button"
-        android:layout_below="@+id/textView13"
-        android:layout_centerHorizontal="true"
-        android:onClick="onButtonClick"
-        android:layout_marginTop="29dp" />
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/surname_et"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/name_et"
-        android:layout_alignTop="@+id/textView9"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView13" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/phonenumberedittext"
+                android:id="@+id/textView11"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/surname_et"
-        android:layout_below="@+id/textView9"
-        android:layout_alignStart="@+id/name_et"
-        android:layout_alignEnd="@+id/name_et" />
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/phone_et"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/phone_et"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/surname_et"
-        android:layout_alignEnd="@+id/surname_et" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/nextofkinedittext"
+                android:id="@+id/textView12"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/kin_et"
-        android:layout_above="@+id/textView13"
-        android:layout_alignStart="@+id/phone_et"
-        android:layout_alignEnd="@+id/phone_et" />
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/kin_et"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/kin_contact_et"
-        android:layout_above="@+id/save_button"
-        android:layout_alignEnd="@+id/kin_et"
-        android:layout_toEndOf="@+id/textView13" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/kincontactedittext"
+                android:id="@+id/textView13"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/kin_contact_et"
+                android:singleLine="true"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/savebuttonstring"
+                android:id="@+id/save_button"
+                android:onClick="onButtonClick"
+                android:layout_marginTop="29dp"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

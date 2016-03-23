@@ -7,12 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context="glen.dan.travelcompanion.MainActivity">
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Safe Travel"
+        android:text="@string/safetravelbuttonstring"
         android:id="@+id/smart_travel_button"
         android:onClick="onButtonClick"
         android:layout_centerVertical="true"
@@ -21,7 +22,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Attractions"
+        android:text="@string/attractionsbuttonstring"
         android:id="@+id/attractions_button"
         android:onClick="onButtonClick"
         android:layout_below="@+id/smart_travel_button"
@@ -30,7 +31,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Weather"
+        android:text="@string/weatherbuttonstring"
         android:id="@+id/weather_button"
         android:onClick="onButtonClick"
         android:layout_below="@+id/attractions_button"
@@ -39,7 +40,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Personal Info"
+        android:text="@string/pinfobuttonstring"
         android:id="@+id/personalinfo_button"
         android:onClick="onButtonClick"
         android:layout_below="@+id/weather_button"
@@ -49,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Welcome to"
+        android:text="@string/welcometotextstring"
         android:id="@+id/welcome_text"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -60,7 +61,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/location_text"
         android:textStyle="bold"
-        android:textSize="35dp"
+        android:textSize="35sp"
         android:layout_below="@+id/welcome_text"
         android:layout_centerHorizontal="true" />
 
@@ -74,7 +75,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Emergency Services"
+        android:text="@string/emergencyservicesstring"
         android:id="@+id/emergency_button"
         android:onClick="onButtonClick"
         android:layout_below="@+id/personalinfo_button"
@@ -83,7 +84,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Log Out"
+        android:text="@string/logoutbuttonstring"
         android:id="@+id/log_out_button"
         android:onClick="onButtonClick"
         android:layout_alignParentBottom="true"
