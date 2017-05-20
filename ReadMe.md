@@ -13,3 +13,13 @@ and place warning markers on the map. The app will also warn users if the wander
 a notification if they get to near to a marker. The apps secondary features include a weather feature to show users todays 
 current weather for their current location, an attractions feature to show users areas of interest in their current location, 
 and a personal information feature for them to store personal information in the case of emergency.
+
+## Technologies used
+Google Maps API:
+The application implements the Google Maps API in its Safe Travel feature.
+Google Places API:
+The application implements the Google Places API in its Attractions feature.
+OpenWeatherMap API:
+OpenWeatherMaps API is implemented in the Weather feature of this application.
+Database/Server:
+The database for the app is running from DCUs servers and is administrated and maintained using PhpMyAdmin and MySQL.
