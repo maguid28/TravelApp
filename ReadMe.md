@@ -16,10 +16,18 @@ and a personal information feature for them to store personal information in the
 
 ## Technologies used
 Google Maps API:
+
 The application implements the Google Maps API in its Safe Travel feature.
+
 Google Places API:
+
 The application implements the Google Places API in its Attractions feature.
+
 OpenWeatherMap API:
+
 OpenWeatherMaps API is implemented in the Weather feature of this application.
+
 Database/Server:
+
 The database for the app is running from DCUs servers and is administrated and maintained using PhpMyAdmin and MySQL.
+
